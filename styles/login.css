@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+:root{
+    --background-body: #0d0d0d;
+    --background-login: #1F1F1F;
+    --texts-login: #ffffff;
+    --border-and-button: #C8AA6E;
+    --hover-button: #a28a59;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--background-body);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    max-width: 650px;
+    margin-top: 25vh;
+
+    border: 3px solid var(--border-and-button);
+    border-radius: 10px;
+    background-color: var(--background-login);
+    gap: 20px;
+}
+
+
+.logo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo-text{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--texts-login);
+    font-size: 30px;
+}
+
+.intro-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    max-width: 300px;
+}
+
+.login-title{
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 30px;
+    color: var(--texts-login);
+}
+
+.login-text{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    color: var(--texts-login);
+}
+
+#email-input, #pass-input{
+    width: 300px;
+    background-color: var(--background-login);
+    outline: none;
+    border: 3px solid var(--border-and-button);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--texts-login);
+}
+
+#email-input:focus, #pass-input:focus{
+    outline: none;
+}
+
+.login-button{
+    color: var(--texts-login);
+    text-decoration: none;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 15px;
+    background-color: var(--border-and-button);
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.login-button:hover{
+    background-color: var(--hover-button);
+}

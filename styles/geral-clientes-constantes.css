@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+:root {
+    --backgorund-information: #0d0d0d;
+    --texts-header: #ffffff;
+    --background-header: #1F1F1F;
+    --link-header-color: #ffffff;
+    --input-search: #ffffff;
+    --colored-list: #C8AA6E;
+    --colored-list-gray: #5A5959;
+    --border-search: #5A5959;
+    --background-tabela-title: #5A5959;
+    --tabela-title-color: #ffffff;
+    --text-table: #d9d9d9;
+    --background-table: #0d0d0d;
+    --border-table: #C8AA6E;
+    --background-button-table: #5A5959;
+    --background-button-table-hover: #666;
+    --color-button-table: #ffffff;
+    --color-num-pag: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--backgorund-information);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: var(--background-header);
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 150px;
+}
+
+.logo-text {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--texts-header);
+    font-size: 30px;
+}
+
+.links-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 150px;
+}
+
+.list-content {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: -0.31px;
+    line-height: normal;
+    margin-left: 30px;
+}
+
+.link-header {
+    text-decoration: none;
+    color: var(--link-header-color);
+}
+
+.link-header:hover {
+    border-bottom: 3px solid white;
+}
+
+#colored-list {
+    background-color: var(--colored-list);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#colored-list-gray {
+    background-color: var(--colored-list-gray);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.menu-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 150px 40px 150px;
+}
+
+.links-list-menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-content-menu {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    letter-spacing: -0.31px;
+    line-height: normal;
+    margin-left: 15px;
+}
+
+.link-header-menu {
+    text-decoration: none;
+    color: var(--link-header-color);
+}
+
+.input-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: 3px solid var(--border-search);
+    padding: 10px 20px 10px 10px;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+#search-input {
+    background-color: transparent;
+    width: 350px;
+    color: var(--input-search);
+    border: none;
+    outline: none;
+}
+
+#search-input:focus {
+    outline: none;
+}
+
+#colored-list-menu {
+    background-color: var(--colored-list);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#colored-list-gray-menu {
+    background-color: var(--colored-list-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#colored-list-gray-menu:hover {
+    background-color: var(--colored-list);
+}
+
+.tabela-title{
+    display: flex;
+    justify-self: center;
+    background-color: var(--background-tabela-title);
+    padding: 15px;
+    width: 100%;
+    max-width: 1230px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.tabela-title-text1, .tabela-title-text2, .tabela-title-text3, 
+.tabela-title-text4, .tabela-title-text5, .tabela-title-text6, .tabela-title-text7{
+    color: var(--tabela-title-color);
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.tabela-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    width: 100%;
+    max-width: 1230px;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: var(--background-table);
+    border: 2px solid var(--border-table);
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid var(--border-table);
+    text-align: left;
+    vertical-align: middle;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    color: var(--text-table);
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.editar,
+.deletar {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.botoes-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.botoes-container button {
+    background-color: var(--background-button-table);
+    color: var(--color-button-table);
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lado-direito{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.num-pag{
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--color-num-pag);
+}
+
+.botoes-container button:hover {
+    background-color: var(--background-button-table-hover);
+}
+
+.botao-adicionar {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.botao-adicionar:hover {
+    background-color: #666;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    background-color: #1c1c1c;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.modal-conteudo h2 {
+    margin-bottom: 20px;
+}
+
+.modal-conteudo form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-conteudo label {
+    margin: 10px 0 5px;
+}
+
+.modal-conteudo input {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #333;
+    color: white;
+}
+
+.botoes-form {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.botoes-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.confirmar {
+    background-color: green;
+    color: white;
+}
+
+.cancelar {
+    background-color: red;
+    color: white;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    background-color: black;
+}
+
+.tabela thead tr {
+    background-color: #555;
+    color: white;
+    text-align: left;
+}
+
+.tabela th,
+.tabela td {
+    padding: 12px;
+    border: 1px solid gold;
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.botao-acao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+}
+
+.botao-acao:hover {
+    transform: scale(1.2);
+}
+
+.botao-acao.editar {
+    color: orange;
+}
+
+.botao-acao.excluir {
+    color: red;
+}

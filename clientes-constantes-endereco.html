@@ -33,11 +33,11 @@
             </div>
 
             <ul class="links-list-menu">
-                <li class="list-content-menu"><a class="link-header-menu" href="clientes-constantes-cliente.html" 
-                    id="colored-list-gray-menu">Cliente</a>
+                <li class="list-content-menu"><a class="link-header-menu" href="clientes-constantes-cliente.html"
+                        id="colored-list-gray-menu">Cliente</a>
                 </li>
-                <li class="list-content-menu"><a class="link-header-menu" href="#"
-                        id="colored-list-menu">Endereço</a></li>
+                <li class="list-content-menu"><a class="link-header-menu" href="#" id="colored-list-menu">Endereço</a>
+                </li>
                 <li class="list-content-menu"><a class="link-header-menu" href="clientes-constantes-viagem.html"
                         id="colored-list-gray-menu">Viagem</a></li>
             </ul>
@@ -167,16 +167,48 @@
 
         <div class="modal" id="modalAdicionar">
             <div class="modal-conteudo">
-                <h2>Adicionar Gasto</h2>
+                <h2 class="form-title">Adicionar Endereço</h2>
                 <form>
-                    <label>Descrição:</label>
-                    <input type="text" placeholder="Digite a descrição">
-                    <label>Valor Gasto:</label>
-                    <input type="number" placeholder="Ex: 1000.00">
-                    <label>Qtd Parcelas:</label>
-                    <input type="number" placeholder="Ex: 9">
-                    <label>Data:</label>
-                    <input type="date">
+                    <label class="form-label">Rua</label>
+                    <input type="text" placeholder="Ex: Viaduto Austregésilo de Ataíde">
+                    <label class="form-label">Bairro</label>
+                    <input type="text" placeholder="Ex: Santa Rita do Passa Quatro">
+                    <label class="form-label">Número</label>
+                    <input type="number" placeholder="Ex: 1000">
+                    <label class="form-label">Cidade</label>
+                    <input type="text" placeholder="Ex: São Paulo">
+                    <label class="form-label" for="estados">Escolha o Estado</label>
+
+                    <select name="estados" id="estados">
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AP">AP</option>
+                        <option value="AM">AM</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MT">MT</option>
+                        <option value="MS">MS</option>
+                        <option value="MG">MG</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PR">PR</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="RJ">RJ</option>
+                        <option value="AM">AM</option>
+                        <option value="RN">RN</option>
+                        <option value="RS">RS</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="SC">SC</option>
+                        <option value="SP">SP</option>
+                        <option value="SE">SE</option>
+                        <option value="TO">TO</option>
+                    </select>
                     <div class="botoes-form">
                         <button class="confirmar">Salvar</button>
                         <button class="cancelar">Cancelar</button>
@@ -187,16 +219,48 @@
 
         <div class="modal" id="modalEditar">
             <div class="modal-conteudo">
-                <h2>Editar Gasto</h2>
+                <h2 class="form-title">Editar Endereço</h2>
                 <form>
-                    <label>Descrição:</label>
-                    <input type="text" value="Troca do pneu">
-                    <label>Valor Gasto:</label>
-                    <input type="number" value="1000.00">
-                    <label>Qtd Parcelas:</label>
-                    <input type="number" value="9">
-                    <label>Data:</label>
-                    <input type="date" value="2025-04-14">
+                    <label class="form-label">Rua</label>
+                    <input type="text" value="Viaduto Austregésilo de Ataíde">
+                    <label class="form-label">Bairro</label>
+                    <input type="text" value="Santa Rita do Passa Quatro">
+                    <label class="form-label">Número</label>
+                    <input type="number" value="1000">
+                    <label class="form-label">Cidade</label>
+                    <input type="text" value="São Paulo">
+                    <label class="form-label" for="estados">Escolha o Estado</label>
+
+                    <select name="estados" id="estados">
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AP">AP</option>
+                        <option value="AM">AM</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MT">MT</option>
+                        <option value="MS">MS</option>
+                        <option value="MG">MG</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PR">PR</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="RJ">RJ</option>
+                        <option value="AM">AM</option>
+                        <option value="RN">RN</option>
+                        <option value="RS">RS</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="SC">SC</option>
+                        <option value="SP" selected>SP</option>
+                        <option value="SE">SE</option>
+                        <option value="TO">TO</option>
+                    </select>
                     <div class="botoes-form">
                         <button class="confirmar">Atualizar</button>
                         <button class="cancelar">Cancelar</button>

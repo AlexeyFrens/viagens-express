@@ -2,14 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 :root {
+
+    /* Header */
     --backgorund-information: #0d0d0d;
     --texts-header: #ffffff;
     --background-header: #1F1F1F;
     --link-header-color: #ffffff;
-    --input-search: #ffffff;
     --colored-list: #C8AA6E;
     --colored-list-gray: #5A5959;
+
+    /* Search Bar */
     --border-search: #5A5959;
+    --input-search: #ffffff;
+
+    /* Table */
     --background-tabela-title: #5A5959;
     --tabela-title-color: #ffffff;
     --text-table: #d9d9d9;
@@ -19,6 +25,14 @@
     --background-button-table-hover: #666;
     --color-button-table: #ffffff;
     --color-num-pag: #ffffff;
+
+    /* Form add/edit table */
+    --background-page-dark: rgba(0, 0, 0, 0.8);
+    --background-form-table: #1F1F1F;
+    --color-form-words: #ffffff;
+    --background-form-input: #333;
+    --confirmar-form-button: #008000;
+    --cancelar-form-button: red;
 }
 
 * {
@@ -159,7 +173,7 @@ body {
     background-color: var(--colored-list);
 }
 
-.tabela-title{
+.tabela-title {
     display: flex;
     justify-self: center;
     background-color: var(--background-tabela-title);
@@ -170,8 +184,13 @@ body {
     border-radius: 15px;
 }
 
-.tabela-title-text1, .tabela-title-text2, .tabela-title-text3, 
-.tabela-title-text4, .tabela-title-text5, .tabela-title-text6, .tabela-title-text7{
+.tabela-title-text1,
+.tabela-title-text2,
+.tabela-title-text3,
+.tabela-title-text4,
+.tabela-title-text5,
+.tabela-title-text6,
+.tabela-title-text7 {
     color: var(--tabela-title-color);
     font-family: "Lato", sans-serif;
     font-weight: 900;
@@ -179,23 +198,23 @@ body {
     font-size: 15px;
 }
 
-.tabela-title-text2{
+.tabela-title-text2 {
     margin-left: 7vw;
 }
 
-.tabela-title-text3{
+.tabela-title-text3 {
     margin-left: 16vw;
 }
 
-.tabela-title-text4{
+.tabela-title-text4 {
     margin-left: 5vw;
 }
 
-.tabela-title-text5{
+.tabela-title-text5 {
     margin-left: 2.5vw;
 }
 
-.tabela-title-text6{
+.tabela-title-text6 {
     margin-left: 20vw;
 }
 
@@ -226,7 +245,7 @@ td {
     color: var(--text-table);
 }
 
-#aumentar{
+#aumentar {
     padding-right: 25px;
 }
 
@@ -263,13 +282,13 @@ td {
     cursor: pointer;
 }
 
-.lado-direito{
+.lado-direito {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.num-pag{
+.num-pag {
     font-family: "Lato", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -282,18 +301,17 @@ td {
 
 
 .botao-adicionar {
-    background-color: #444;
-    color: white;
+    background-color: var(--background-button-table);
+    color: var(--color-button-table);
     padding: 10px 20px;
     border-radius: 8px;
     border: none;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .botao-adicionar:hover {
-    background-color: #666;
+    background-color: var(--background-button-table-hover);
 }
 
 .modal {
@@ -303,14 +321,14 @@ td {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--background-page-dark);
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
 .modal-conteudo {
-    background-color: #1c1c1c;
+    background-color: var(--background-form-table);
     padding: 30px;
     border-radius: 12px;
     width: 100%;
@@ -334,8 +352,8 @@ td {
     padding: 10px;
     border: none;
     border-radius: 6px;
-    background-color: #333;
-    color: white;
+    background-color: var(--background-form-input);
+    color: var(--color-form-words);
 }
 
 .botoes-form {
@@ -354,56 +372,23 @@ td {
 }
 
 .confirmar {
-    background-color: green;
-    color: white;
+    background-color: var(--confirmar-form-button);
+    color: var(--color-form-words);
 }
 
 .cancelar {
-    background-color: red;
-    color: white;
+    background-color: var(--cancelar-form-button);
+    color: var(--color-form-words);
 }
 
-.tabela {
-    width: 100%;
-    border-collapse: collapse;
-    color: white;
-    background-color: black;
+.form-title,
+.form-label {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    color: var(--color-form-words);
 }
 
-.tabela thead tr {
-    background-color: #555;
-    color: white;
-    text-align: left;
-}
-
-.tabela th,
-.tabela td {
-    padding: 12px;
-    border: 1px solid gold;
-}
-
-.acoes {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.botao-acao {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: transform 0.2s ease;
-}
-
-.botao-acao:hover {
-    transform: scale(1.2);
-}
-
-.botao-acao.editar {
-    color: orange;
-}
-
-.botao-acao.excluir {
-    color: red;
+.form-label {
+    font-size: 15px;
 }

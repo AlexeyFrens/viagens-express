@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+:root {
+
+  /* Header */
+  --background-landing-page: #0d0d0d;
+  --background-header: #1f1f1f;
+  --color-logo-title: #ffffff;
+  --link-header-color: #ffffff;
+
+  /* Big Image */
+  --title-big-image: #ffffff;
+  --text-big-image: #ffffff;
+  --button-big-image-color: #C8AA6E;
+  --button-big-image-text-color: #ffffff;
+
+  /* Motivo */
+  --title-motivo: #C8AA6E;
+  --subtitle-motivo: #ffffff;
+  --title-rectangle-motivo: #C8AA6E;
+  --text-rectangle-motivo: #ffffff;
+  --first-rectangle-container: #C8AA6E;
+  --rectangle-motivo-container: #1F1F1F;
+
+  /* Números */
+  --numeros-title-first: #C8AA6E;
+  --numeros-basic: #ffffff;
+
+  /* Price */
+  --price-titles: #C8AA6E;
+  --price-content: #ffffff;
+  --price-borders: #C8AA6E;
+  --price-background: #1F1F1F;
+
+  /* Avaliação */
+  --avaliacao-title: #C8AA6E;
+  --avaliacao-text: #ffffff;
+  --avaliacao-name: #C8AA6E;
+  --avaliacao-border: #C8AA6E;
+  --avaliacao-card: #1F1F1F;
+
+  /* Footer */
+  --footer-container: #1F1F1F;
+  --footer-text: #ffffff;
+
+  /* Login */
+  --background-body: #0d0d0d;
+  --background-login: #1F1F1F;
+  --texts-login: #ffffff;
+  --border-and-button: #C8AA6E;
+  --hover-button: #a28a59;
+
+  /*--------------------- Painel ADM --------------------*/
+  /* Header */
+  --backgorund-information: #0d0d0d;
+  --texts-header: #ffffff;
+  --colored-list: #C8AA6E;
+  --colored-list-gray: #5A5959;
+
+  /* Search Bar */
+  --border-search: #5A5959;
+  --input-search: #ffffff;
+
+  /* Table */
+  --background-tabela-title: #5A5959;
+  --tabela-title-color: #ffffff;
+  --text-table: #d9d9d9;
+  --background-table: #0d0d0d;
+  --border-table: #C8AA6E;
+  --background-button-table: #5A5959;
+  --background-button-table-hover: #666;
+  --color-button-table: #ffffff;
+  --color-num-pag: #ffffff;
+
+  /* Form add/edit table */
+  --background-page-dark: rgba(0, 0, 0, 0.8);
+  --background-form-table: #1F1F1F;
+  --color-form-words: #ffffff;
+  --background-form-input: #333;
+  --confirmar-form-button: green;
+  --cancelar-form-button: red;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  background-color: #0d0d0d;
+}
+

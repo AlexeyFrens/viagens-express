@@ -1,0 +1,60 @@
+.avaliacao-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avaliacao-title {
+  color: var(--avaliacao-title);
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 30px;
+  margin-top: 70px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+  gap: 20px;
+}
+
+.avaliacao-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  text-align: justify;
+
+
+  background-color: var(--avaliacao-card);
+  padding: 20px;
+  margin-top: 40px;
+  max-width: 265px;
+  height: 240px;
+  border: 3px solid var(--avaliacao-border);
+  border-radius: 10px;
+}
+
+.avaliacao-text {
+  color: var(--avaliacao-text);
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 17px;
+  margin-top: 10px;
+}
+
+.avaliacao-name {
+  color: var(--avaliacao-name);
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  margin-top: 10px;
+}

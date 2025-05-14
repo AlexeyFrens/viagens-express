@@ -1,0 +1,176 @@
+<div class="information-container">
+  <header class="header-container">
+    <div class="logo-container">
+      <img src="images/logo.svg" alt="carro branco de lado">
+      <p class="logo-text">Painel Administrador</p>
+    </div>
+
+    <ul class="links-list">
+      <li class="list-content"><a class="link-header" routerLink="/clientes">Clientes
+        constantes</a></li>
+      <li class="list-content"><a class="link-header" href="#" id="colored-list">Custos</a></li>
+      <li class="list-content"><a class="link-header" routerLink="">Sair do Painel</a></li>
+    </ul>
+  </header>
+
+  <section class="menu-actions">
+    <div class="input-container">
+      <img src="images/search.svg" alt="">
+      <input type="text" name="search-input" id="search-input"
+             placeholder="Pesquisar por nome, sobrenome ou telefone">
+    </div>
+  </section>
+
+  <section class="tabela-title">
+    <p class="tabela-title-text1">Id</p>
+    <p class="tabela-title-text2">Descrição</p>
+    <p class="tabela-title-text3">Valor Gasto (R$)</p>
+    <p class="tabela-title-text4">Qtd Parcelas</p>
+    <p class="tabela-title-text5">Data</p>
+    <p class="tabela-title-text6">Ações</p>
+  </section>
+
+  <section class="tabela-container">
+    <table>
+      <tbody>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Troca do pneu</td>
+        <td>1000.00</td>
+        <td id="aumentar">9</td>
+        <td>14/04/2025</td>
+        <td class="acoes">
+          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
+          <button class="deletar" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="botoes-container">
+      <button class="adicionar" (click)="actionsButton()">Adicionar</button>
+      <div class="lado-direito">
+        <p class="num-pag">1/1</p>
+        <button>Anterior</button>
+        <button>Próxima</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="modalAdicionar">
+    <div class="modal-conteudo">
+      <h2 class="form-title">Adicionar Gasto</h2>
+      <form>
+        <label class="form-label">Descrição</label>
+        <input type="text" placeholder="Digite a descrição">
+        <label class="form-label">Valor Gasto</label>
+        <input type="number" placeholder="Ex: 1000.00">
+        <label class="form-label">Qtd Parcelas</label>
+        <input type="number" placeholder="Ex: 9">
+        <label class="form-label">Data</label>
+        <input type="date" class="date">
+        <div class="botoes-form">
+          <button class="confirmar">Salvar</button>
+          <button class="cancelar">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="modalEditar">
+    <div class="modal-conteudo">
+      <h2 class="form-title">Editar Gasto</h2>
+      <form>
+        <label class="form-label">Descrição</label>
+        <input type="text" value="Troca do pneu">
+        <label class="form-label">Valor Gasto</label>
+        <input type="number" value="1000.00">
+        <label class="form-label">Qtd Parcelas</label>
+        <input type="number" value="9">
+        <label class="form-label">Data</label>
+        <input type="date" value="2025-04-14">
+        <div class="botoes-form">
+          <button class="confirmar">Atualizar</button>
+          <button class="cancelar">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

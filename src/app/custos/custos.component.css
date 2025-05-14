@@ -60,6 +60,35 @@
   border-radius: 10px;
 }
 
+.empty{
+  color: white;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 20px;
+  text-align: center;
+}
+
+.td_id{
+  width: 5.659vw;
+}
+
+.td_descricao{
+  width: 40vw;
+}
+
+.td_valorGasto{
+  width: 12vw;
+}
+
+.td_qtdParcelas{
+  width: 10vw;
+}
+
+.td_data{
+  width: 10vw;
+}
+
 .menu-actions {
   display: flex;
   justify-content: center;
@@ -152,23 +181,23 @@
 }
 
 .tabela-title-text2 {
-  margin-left: 7vw;
+  margin-left: 4vw;
 }
 
 .tabela-title-text3 {
-  margin-left: 16vw;
+  margin-left: 31vw;
 }
 
 .tabela-title-text4 {
-  margin-left: 5vw;
+  margin-left: 4vw;
 }
 
 .tabela-title-text5 {
-  margin-left: 2.5vw;
+  margin-left: 3vw;
 }
 
 .tabela-title-text6 {
-  margin-left: 20vw;
+  margin-left: 10vw;
 }
 
 .tabela-container {
@@ -206,6 +235,7 @@ td {
   display: flex;
   gap: 10px;
   justify-content: center;
+  width: 10vw;
 }
 
 .editar,
@@ -267,8 +297,12 @@ td {
   background-color: var(--background-button-table-hover);
 }
 
-.modal {
+.modal-fechado{
   display: none;
+}
+
+.modal {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;

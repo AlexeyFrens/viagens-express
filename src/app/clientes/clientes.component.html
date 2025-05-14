@@ -20,7 +20,8 @@
     </div>
 
     <ul class="links-list-menu">
-      <li class="list-content-menu"><a class="link-header-menu" routerLink="/clientes" id="colored-list-menu">Cliente</a>
+      <li class="list-content-menu"><a class="link-header-menu" routerLink="/clientes"
+                                       id="colored-list-menu">Cliente</a>
       </li>
       <li class="list-content-menu"><a class="link-header-menu" routerLink="/enderecos"
                                        id="colored-list-gray-menu">Endereço</a></li>
@@ -40,109 +41,32 @@
   </section>
 
   <section class="tabela-container">
-    <table>
-      <tbody>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>João Gabriel</td>
-        <td>Barbosa de Andrade dos Santos</td>
-        <td>100</td>
-        <td>1111111111</td>
-        <td>1111111111</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+    @if (this.listaClientes.length == 0) {
+      <p class="empty">Não há clientes cadastrados</p>
+    } @else {
+      <table>
+        <tbody>
+          @for (cliente of this.listaClientes; track cliente.id) {
+            <tr>
+              <td class="td_id">{{ cliente.id }}</td>
+              <td class="td_nome">{{ cliente.nome }}</td>
+              <td class="td_sobrenome">{{ cliente.sobrenome }}</td>
+              <td class="td_id_endereco">{{ cliente.id_endereco }}</td>
+              <td class="td_telefone">{{ cliente.telefone }}</td>
+              <td class="td_telefone2">{{ cliente.telefone2 }}</td>
+              <td class="acoes">
+                <button class="editar" title="Editar" (click)="abrirModalEditar(cliente.id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(cliente.id)">🗑️</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
 
     <div class="botoes-container">
-      <button class="adicionar" (click)="actionsButton()">Adicionar</button>
+      <button class="adicionar" (click)="classeAdicionar = 'modal'">Adicionar</button>
       <div class="lado-direito">
         <p class="num-pag">1/1</p>
         <button>Anterior</button>
@@ -151,45 +75,45 @@
     </div>
   </section>
 
-  <div class="modal" id="modalAdicionar">
+  <div [class]="classeAdicionar" id="modalAdicionar">
     <div class="modal-conteudo">
       <h2 class="form-title">Adicionar Cliente</h2>
       <form>
         <label class="form-label">Nome</label>
-        <input type="text" placeholder="Digite o nome do cliente">
+        <input [(ngModel)]="nome" name="nome" type="text" placeholder="Digite o nome do cliente">
         <label class="form-label">Sobrenome</label>
-        <input type="text" placeholder="Digite o sobrenome do cliente">
+        <input [(ngModel)]="sobrenome" name="sobrenome" type="text" placeholder="Digite o sobrenome do cliente">
         <label class="form-label">Id do Endereço</label>
-        <input type="number" placeholder="Ex: 9">
+        <input [(ngModel)]="id_endereco" name="id_endereco" type="number" placeholder="Ex: 9">
         <label class="form-label">Telefone *</label>
-        <input type="text" placeholder="Ex: (11) 96854-4925">
+        <input [(ngModel)]="telefone" name="telefone" type="text" placeholder="Ex: (11) 96854-4925">
         <label class="form-label">Telefone 2</label>
-        <input type="text" placeholder="Ex: (11) 96854-4925">
+        <input [(ngModel)]="telefone2" name="telefone2" type="text" placeholder="Ex: (11) 96854-4925">
         <div class="botoes-form">
-          <button class="confirmar">Salvar</button>
-          <button class="cancelar">Cancelar</button>
+          <button class="confirmar" (click)="adicionar()">Salvar</button>
+          <button class="cancelar" (click)="classeAdicionar = 'modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="modal" id="modalEditar">
-    <div class="modal-conteudo">
+  <div [class]="classeEditar" id="modalEditar">
+    <div class="modal-conteudo" *ngIf="clienteEditando">
       <h2 class="form-title">Editar Cliente</h2>
-      <form>
+      <form (submit)="salvarEdicao()">
         <label class="form-label">Nome</label>
-        <input type="text" value="João Gabriel">
+        <input [(ngModel)]="clienteEditando.nome" name="nome" type="text">
         <label class="form-label">Sobrenome</label>
-        <input type="text" value="Barbosa de Andrade dos Santos">
+        <input [(ngModel)]="clienteEditando.sobrenome" name="sobrenome" type="text">
         <label class="form-label">Id do Endereço</label>
-        <input type="number" value="100">
+        <input [(ngModel)]="clienteEditando.id_endereco" name="id_endereco" type="number">
         <label class="form-label">Telefone *</label>
-        <input type="text" value="1111111111">
+        <input [(ngModel)]="clienteEditando.telefone" name="telefone" type="text">
         <label class="form-label">Telefone 2</label>
-        <input type="text" value="1111111111">
+        <input [(ngModel)]="clienteEditando.telefone2" name="telefone2" type="text">
         <div class="botoes-form">
-          <button class="confirmar">Atualizar</button>
-          <button class="cancelar">Cancelar</button>
+          <button class="confirmar" type="submit">Atualizar</button>
+          <button class="cancelar" (click)="classeEditar='modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>

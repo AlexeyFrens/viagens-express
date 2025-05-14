@@ -1,62 +1,78 @@
 import { Component } from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-clientes-viagem',
   imports: [
-    RouterLink
+    RouterLink,
+    FormsModule,
+    NgIf
   ],
   templateUrl: './clientes-viagem.component.html',
   styleUrl: './clientes-viagem.component.css'
 })
 export class ClientesViagemComponent {
-  actionsButton(){
-    // Abrir modal de adicionar
-    const botaoAdicionar = document.querySelector<HTMLButtonElement>(".adicionar");
-    const modalAdicionar = document.getElementById("modalAdicionar") as HTMLElement | null;
+  listaViagem: any[] = [];
 
-    if (botaoAdicionar && modalAdicionar) {
-      botaoAdicionar.addEventListener("click", () => {
-        modalAdicionar.style.display = "flex";
-      });
+  incrementarId = 0;
+
+  id = 0;
+  id_cliente = 0;
+  date = "";
+  time = "";
+
+
+  clienteEditando: any = null;
+
+  classeAdicionar = "modal-fechado";
+  classeEditar = "modal-fechado";
+
+  resetarValores(){
+    this.id = 0;
+    this.id_cliente = 0;
+    this.date = "";
+    this.time = "";
+  }
+
+  adicionar(){
+    if(this.id !== null && this.date !== "" && this.time !== "") {
+      const newCliente = {
+        id: this.incrementarId,
+        id_cliente: this.id_cliente,
+        date: this.date,
+        time: this.time,
+      }
+
+      this.listaViagem.push(newCliente);
+
+      this.resetarValores();
+      this.classeAdicionar = "modal-fechado";
+      this.incrementarId++;
+    }else{
+      this.classeAdicionar = "modal-fechado";
     }
+  }
 
-    // Abrir modal de editar (pega todos os botões de editar)
-    const botoesEditar = document.querySelectorAll<HTMLButtonElement>(".editar");
-    const modalEditar = document.getElementById("modalEditar") as HTMLElement | null;
+  abrirModalEditar(id: number) {
+    const cliente = this.listaViagem.find(c => c.id === id);
+    if (cliente) {
+      this.clienteEditando = { ...cliente };
+      this.classeEditar = "modal";
+    }
+  }
 
-    botoesEditar.forEach(botao => {
-      botao.addEventListener("click", () => {
-        if (modalEditar) {
-          modalEditar.style.display = "flex";
-        }
-      });
-    });
+  salvarEdicao() {
+    const index = this.listaViagem.findIndex(c => c.id === this.clienteEditando.id);
+    if (index !== -1) {
+      this.listaViagem[index] = { ...this.clienteEditando };
+    }
+    this.classeEditar = "modal-fechado";
+    this.clienteEditando = null;
+  }
 
-    // Fechar modais ao clicar em "Cancelar"
-    const botoesCancelar = document.querySelectorAll<HTMLButtonElement>(".cancelar");
-
-    botoesCancelar.forEach(botao => {
-      botao.addEventListener("click", (e: MouseEvent) => {
-        e.preventDefault(); // evita submit do formulário
-        if (modalAdicionar) {
-          modalAdicionar.style.display = "none";
-        }
-        if (modalEditar) {
-          modalEditar.style.display = "none";
-        }
-      });
-    });
-
-    // Fechar ao clicar fora do conteúdo do modal
-    window.addEventListener("click", function (e: MouseEvent) {
-      const target = e.target as HTMLElement;
-      if (target === modalAdicionar) {
-        modalAdicionar.style.display = "none";
-      }
-      if (target === modalEditar) {
-        modalEditar.style.display = "none";
-      }
-    });
+  excluirCliente(id: number) {
+    this.listaViagem = this.listaViagem.filter((item) => item.id !== id);
   }
 }

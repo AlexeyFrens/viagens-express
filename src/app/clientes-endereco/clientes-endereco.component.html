@@ -41,109 +41,31 @@
   </section>
 
   <section class="tabela-container">
-    <table>
-      <tbody>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>Viaduto Austregésilo de Ataíde</td>
-        <td>Santa Rita do Passa Quatro</td>
-        <td>10000</td>
-        <td>São Paulo</td>
-        <td>SP</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    @if (this.listaEndereco.length == 0) {
+      <p class="empty">Não há clientes cadastrados</p>
+    } @else {
+      <table>
+        <tbody>
+          @for (endereco of this.listaEndereco; track endereco.id) {
+            <tr>
+              <td class="td_id">{{ endereco.id }}</td>
+              <td class="td_rua">{{ endereco.rua }}</td>
+              <td class="td_bairro">{{ endereco.bairro }}</td>
+              <td class="td_numero">{{ endereco.numero }}</td>
+              <td class="td_cidade">{{ endereco.cidade }}</td>
+              <td class="td_estado">{{ endereco.estado }}</td>
+              <td class="acoes">
+                <button class="editar" title="Editar" (click)="abrirModalEditar(endereco.id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(endereco.id)">🗑️</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
 
     <div class="botoes-container">
-      <button class="adicionar" (click)="actionsButton()">Adicionar</button>
+      <button class="adicionar" (click)="classeAdicionar = 'modal'">Adicionar</button>
       <div class="lado-direito">
         <p class="num-pag">1/1</p>
         <button>Anterior</button>
@@ -152,21 +74,21 @@
     </div>
   </section>
 
-  <div class="modal" id="modalAdicionar">
+  <div [class]="classeAdicionar" id="modalAdicionar">
     <div class="modal-conteudo">
       <h2 class="form-title">Adicionar Endereço</h2>
       <form>
         <label class="form-label">Rua</label>
-        <input type="text" placeholder="Ex: Viaduto Austregésilo de Ataíde">
+        <input [(ngModel)]="rua" name="rua" type="text" placeholder="Ex: Viaduto Austregésilo de Ataíde">
         <label class="form-label">Bairro</label>
-        <input type="text" placeholder="Ex: Santa Rita do Passa Quatro">
+        <input [(ngModel)]="bairro" name="bairro" type="text" placeholder="Ex: Santa Rita do Passa Quatro">
         <label class="form-label">Número</label>
-        <input type="number" placeholder="Ex: 1000">
+        <input [(ngModel)]="numero" name="numero" type="number" placeholder="Ex: 1000">
         <label class="form-label">Cidade</label>
-        <input type="text" placeholder="Ex: São Paulo">
+        <input [(ngModel)]="cidade" name="cidade" type="text" placeholder="Ex: São Paulo">
         <label class="form-label" for="estados">Escolha o Estado</label>
 
-        <select name="estados" id="estados">
+        <select [(ngModel)]="estado" name="estado" id="estados">
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -197,28 +119,28 @@
           <option value="TO">TO</option>
         </select>
         <div class="botoes-form">
-          <button class="confirmar">Salvar</button>
-          <button class="cancelar">Cancelar</button>
+          <button class="confirmar" (click)="adicionar()">Salvar</button>
+          <button class="cancelar" (click)="classeAdicionar = 'modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="modal" id="modalEditar">
-    <div class="modal-conteudo">
+  <div [className]="classeEditar" id="modalEditar">
+    <div class="modal-conteudo" *ngIf="clienteEditando">
       <h2 class="form-title">Editar Endereço</h2>
-      <form>
+      <form (submit)="salvarEdicao()">
         <label class="form-label">Rua</label>
-        <input type="text" value="Viaduto Austregésilo de Ataíde">
+        <input [(ngModel)]="clienteEditando.rua" name="rua" type="text">
         <label class="form-label">Bairro</label>
-        <input type="text" value="Santa Rita do Passa Quatro">
+        <input [(ngModel)]="clienteEditando.bairro" name="bairro" type="text">
         <label class="form-label">Número</label>
-        <input type="number" value="1000">
+        <input [(ngModel)]="clienteEditando.numero" name="numero" type="number">
         <label class="form-label">Cidade</label>
-        <input type="text" value="São Paulo">
+        <input [(ngModel)]="clienteEditando.cidade" name="cidade" type="text">
         <label class="form-label" for="estados">Escolha o Estado</label>
 
-        <select name="estados" id="estados">
+        <select [(ngModel)]="estado" name="estado" id="estados">
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -244,13 +166,13 @@
           <option value="RO">RO</option>
           <option value="RR">RR</option>
           <option value="SC">SC</option>
-          <option value="SP" selected>SP</option>
+          <option value="SP">SP</option>
           <option value="SE">SE</option>
           <option value="TO">TO</option>
         </select>
         <div class="botoes-form">
-          <button class="confirmar">Atualizar</button>
-          <button class="cancelar">Cancelar</button>
+          <button class="confirmar" type="submit">Atualizar</button>
+          <button class="cancelar" (click)="classeAdicionar = 'modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>

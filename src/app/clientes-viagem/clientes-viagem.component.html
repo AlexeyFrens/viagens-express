@@ -39,93 +39,28 @@
   </section>
 
   <section class="tabela-container">
-    <table>
-      <tbody>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      <tr>
-        <td>100</td>
-        <td>100</td>
-        <td>14/04/2025</td>
-        <td>19:22</td>
-        <td class="acoes">
-          <button class="editar" title="Editar" (click)="actionsButton()">✏️</button>
-          <button class="deletar" title="Excluir">🗑️</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
+    @if (this.listaViagem.length == 0) {
+      <p class="empty">Não há clientes cadastrados</p>
+    } @else {
+      <table>
+        <tbody>
+          @for (viagem of this.listaViagem; track viagem.id) {
+            <tr>
+              <td class="td_id">{{ viagem.id }}</td>
+              <td class="td_id_cliente">{{ viagem.id_cliente }}</td>
+              <td class="td_date">{{ viagem.date }}</td>
+              <td class="td_time">{{ viagem.time }}</td>
+              <td class="acoes">
+                <button class="editar" title="Editar" (click)="abrirModalEditar(viagem.id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(viagem.id)">🗑️</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
     <div class="botoes-container">
-      <button class="adicionar" (click)="actionsButton()">Adicionar</button>
+      <button class="adicionar" (click)="classeAdicionar = 'modal'">Adicionar</button>
       <div class="lado-direito">
         <p class="num-pag">1/1</p>
         <button>Anterior</button>
@@ -134,34 +69,34 @@
     </div>
   </section>
 
-  <div class="modal" id="modalAdicionar">
+  <div [className]="classeAdicionar" id="modalAdicionar">
     <div class="modal-conteudo">
       <h2 class="form-title">Adicionar Viagem</h2>
       <form>
         <label class="form-label">Id Cliente</label>
-        <input type="text" placeholder="Ex: 100">
+        <input [(ngModel)]="id_cliente" name="id_cliente" type="text" placeholder="Ex: 100">
         <label class="form-label">Data</label>
-        <input type="date">
+        <input [(ngModel)]="date" name="date" type="date">
         <label class="form-label">Hora</label>
-        <input type="time">
+        <input [(ngModel)]="time" name="time" type="time">
         <div class="botoes-form">
-          <button class="confirmar">Salvar</button>
-          <button class="cancelar">Cancelar</button>
+          <button class="confirmar" (click)="adicionar()">Salvar</button>
+          <button class="cancelar" (click)="classeAdicionar = 'modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="modal" id="modalEditar">
-    <div class="modal-conteudo">
+  <div [className]="classeEditar" id="modalEditar">
+    <div class="modal-conteudo" *ngIf="clienteEditando">
       <h2 class="form-title">Editar Viagem</h2>
-      <form>
+      <form (submit)="salvarEdicao()">
         <label class="form-label">Id Cliente</label>
-        <input type="text" value="100">
+        <input [(ngModel)]="clienteEditando.id_cliente" name="id_cliente" type="text" value="100">
         <label class="form-label">Data</label>
-        <input type="date" value="2024-04-14">
+        <input [(ngModel)]="clienteEditando.date" name="date" type="date" value="2024-04-14">
         <label class="form-label">Hora</label>
-        <input type="time" value="19:22">
+        <input [(ngModel)]="clienteEditando.time" name="time" type="time" value="19:22">
         <div class="botoes-form">
           <button class="confirmar">Atualizar</button>
           <button class="cancelar">Cancelar</button>

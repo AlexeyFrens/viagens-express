@@ -1,5 +1,3 @@
-@import "title-table.css";
-
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -128,6 +126,39 @@
   background-color: var(--colored-list);
 }
 
+.empty{
+  color: white;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 20px;
+  text-align: center;
+}
+
+.td_id{
+  width: 4.659vw;
+}
+
+.td_rua{
+  width: 24.423vw;
+}
+
+.td_bairro{
+  width: 19.941vw;
+}
+
+.td_numero{
+  width: 4.945vw;
+}
+
+.td_cidade{
+  width: 11.657vw;
+}
+
+.td_estado{
+  width: 4.527vw;
+}
+
 .tabela-title{
   display: flex;
   justify-self: center;
@@ -146,6 +177,30 @@
   font-weight: 900;
   font-style: normal;
   font-size: 15px;
+}
+
+.tabela-title-text2{
+  margin-left: 3.4vw;
+}
+
+.tabela-title-text3{
+  margin-left: 22.5vw;
+}
+
+.tabela-title-text4{
+  margin-left: 17vw;
+}
+
+.tabela-title-text5{
+  margin-left: 1.5vw;
+}
+
+.tabela-title-text6{
+  margin-left: 8.5vw;
+}
+
+.tabela-title-text7{
+  margin-left: 4.5vw;
 }
 
 .tabela-container {
@@ -179,6 +234,7 @@ td {
   display: flex;
   gap: 10px;
   justify-content: center;
+  width: 9.765vw;
 }
 
 .editar,
@@ -239,8 +295,12 @@ td {
   background-color: var(--background-button-table-hover);
 }
 
-.modal {
+.modal-fechado{
   display: none;
+}
+
+.modal {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;

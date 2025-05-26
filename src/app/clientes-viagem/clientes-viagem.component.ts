@@ -16,6 +16,29 @@ import {NgIf} from '@angular/common';
 export class ClientesViagemComponent {
   listaViagem: any[] = [];
 
+  paginaAtual = 1;
+  itensPorPagina = 8;
+
+  get custosPaginados() {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    return this.listaViagemFiltrados.slice(inicio, fim);
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.listaViagemFiltrados.length / this.itensPorPagina);
+  }
+
+  mudarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaAtual = pagina;
+    }
+  }
+
+  listaViagemFiltrados: any[] = [];
+  
+  filtro: string = "";
+
   incrementarId = 0;
 
   id = 0;
@@ -28,6 +51,11 @@ export class ClientesViagemComponent {
 
   classeAdicionar = "modal-fechado";
   classeEditar = "modal-fechado";
+
+  constructor() {
+    this.listaViagemFiltrados = this.listaViagem
+  }
+
 
   resetarValores(){
     this.id = 0;
@@ -46,6 +74,7 @@ export class ClientesViagemComponent {
       }
 
       this.listaViagem.push(newCliente);
+      this.aplicarFiltro();
 
       this.resetarValores();
       this.classeAdicionar = "modal-fechado";
@@ -67,6 +96,7 @@ export class ClientesViagemComponent {
     const index = this.listaViagem.findIndex(c => c.id === this.clienteEditando.id);
     if (index !== -1) {
       this.listaViagem[index] = { ...this.clienteEditando };
+      this.aplicarFiltro();
     }
     this.classeEditar = "modal-fechado";
     this.clienteEditando = null;
@@ -74,5 +104,22 @@ export class ClientesViagemComponent {
 
   excluirCliente(id: number) {
     this.listaViagem = this.listaViagem.filter((item) => item.id !== id);
+    this.aplicarFiltro();
+  }
+
+  aplicarFiltro() {
+    const termo = this.filtro.trim().toLowerCase();
+    
+    if (termo === '') {
+      this.listaViagemFiltrados = [...this.listaViagem];
+      this.paginaAtual = 1;
+    } else {
+      this.listaViagemFiltrados = this.listaViagem.filter(viagem =>
+        viagem.id_cliente.toString().includes(termo) ||
+        viagem.date.includes(termo) ||
+        viagem.time.includes(termo) ||
+        viagem.id.toString().includes(termo)
+      );
+    }
   }
 }

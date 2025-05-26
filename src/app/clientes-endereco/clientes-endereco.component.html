@@ -16,7 +16,8 @@
     <div class="input-container">
       <img src="images/search.svg" alt="">
       <input type="text" name="search-input" id="search-input"
-             placeholder="Pesquisar por nome, sobrenome ou telefone">
+      [(ngModel)]="filtro"
+      (input)="aplicarFiltro()" placeholder="Pesquisar por nome, sobrenome ou telefone">
     </div>
 
     <ul class="links-list-menu">
@@ -46,7 +47,7 @@
     } @else {
       <table>
         <tbody>
-          @for (endereco of this.listaEndereco; track endereco.id) {
+          @for (endereco of this.custosPaginados; track endereco.id) {
             <tr>
               <td class="td_id">{{ endereco.id }}</td>
               <td class="td_rua">{{ endereco.rua }}</td>
@@ -67,9 +68,9 @@
     <div class="botoes-container">
       <button class="adicionar" (click)="classeAdicionar = 'modal'">Adicionar</button>
       <div class="lado-direito">
-        <p class="num-pag">1/1</p>
-        <button>Anterior</button>
-        <button>Próxima</button>
+        <p class="num-pag">{{ paginaAtual }}/{{ totalPaginas }}</p>
+        <button (click)="mudarPagina(paginaAtual - 1)" [disabled]="paginaAtual === 1">Anterior</button>
+        <button (click)="mudarPagina(paginaAtual + 1)" [disabled]="paginaAtual === totalPaginas">Próxima</button>
       </div>
     </div>
   </section>

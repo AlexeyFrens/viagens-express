@@ -1,23 +1,43 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { CustosService } from './custos.service';
 
 @Component({
   selector: 'app-custos',
+  standalone: true,
   imports: [
     RouterLink,
     FormsModule,
-    NgIf
+    NgIf,
   ],
   templateUrl: './custos.component.html',
-  styleUrl: './custos.component.css'
+  styleUrls: ['./custos.component.css']
 })
-export class CustosComponent {
+export class CustosComponent implements OnInit {
+
   listaCustos: any[] = [];
+  listaCustosFiltrados: any[] = [];
 
   paginaAtual = 1;
   itensPorPagina = 8;
+  filtro = '';
+
+  descricao = '';
+  valorGasto = 0;
+  qtdParcelas = 0;
+  data = '';
+
+  clienteEditando: any = null;
+  classeAdicionar = 'modal-fechado';
+  classeEditar = 'modal-fechado';
+
+  constructor(private custosService: CustosService) {}
+
+  ngOnInit() {
+    this.carregarCustos();
+  }
 
   get custosPaginados() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
@@ -35,94 +55,68 @@ export class CustosComponent {
     }
   }
 
-  listaCustosFiltrados: any[] = [];
-  
-  filtro: string = "";
-
-  incrementarId = 0;
-
-  id = 0;
-  descricao = ""
-  valorGasto = 0
-  qtdParcelas = 0
-  data = ""
-
-
-  clienteEditando: any = null;
-
-  classeAdicionar = "modal-fechado";
-  classeEditar = "modal-fechado";
-
-  constructor() {
-    this.listaCustosFiltrados = this.listaCustos
-  }
-
-  resetarValores(){
-    this.id = 0;
-    this.descricao = ""
-    this.valorGasto = 0
-    this.qtdParcelas = 0
-    this.data = ""
-  }
-
-  adicionar(){
-    if(this.id !== null && this.descricao !== "" && this.valorGasto !== null && this.qtdParcelas !== null && this.data !== "") {
-      const newCliente = {
-        id: this.incrementarId,
-        descricao: this.descricao,
-        valorGasto: this.valorGasto,
-        qtdParcelas: this.qtdParcelas,
-        data: this.data
-      }
-
-      this.listaCustos.push(newCliente);
+  carregarCustos() {
+    this.custosService.getCustos().subscribe(data => {
+      this.listaCustos = data;
       this.aplicarFiltro();
-
-      this.resetarValores();
-      this.classeAdicionar = "modal-fechado";
-      this.incrementarId++;
-    }else{
-      this.classeAdicionar = "modal-fechado";
-    }
+    });
   }
 
-  abrirModalEditar(id: number) {
-    const cliente = this.listaCustos.find(c => c.id === id);
-    if (cliente) {
-      this.clienteEditando = { ...cliente };
-      this.classeEditar = "modal";
-    }
+  adicionar() {
+    const novoCusto = {
+      descricao: this.descricao,
+      valorGasto: this.valorGasto,
+      qtdParcelas: this.qtdParcelas,
+      data: this.data
+    };
+
+    this.custosService.adicionar(novoCusto).subscribe(() => {
+      this.carregarCustos();
+      this.resetarValores();
+      this.classeAdicionar = 'modal-fechado';
+    });
+  }
+
+  abrirModalEditar(id: string) {
+    const custo = this.listaCustos.find(c => c._id === id);
+    this.clienteEditando = { ...custo };
+    this.classeEditar = 'modal';
   }
 
   salvarEdicao() {
-    const index = this.listaCustos.findIndex(c => c.id === this.clienteEditando.id);
-    if (index !== -1) {
-      this.listaCustos[index] = { ...this.clienteEditando };
-      this.aplicarFiltro();
-    }
-    this.classeEditar = "modal-fechado";
-    this.clienteEditando = null;
+    this.custosService.atualizar(this.clienteEditando._id, this.clienteEditando).subscribe(() => {
+      this.carregarCustos();
+      this.classeEditar = 'modal-fechado';
+      this.clienteEditando = null;
+    });
   }
 
-  excluirCliente(id: number) {
-    this.listaCustos = this.listaCustos.filter((item) => item.id !== id);
-    this.aplicarFiltro();
+  excluirCliente(id: string) {
+    this.custosService.deletar(id).subscribe(() => {
+      this.carregarCustos();
+    });
   }
 
   aplicarFiltro() {
     const termo = this.filtro.trim().toLowerCase();
-    
     if (termo === '') {
       this.listaCustosFiltrados = [...this.listaCustos];
       this.paginaAtual = 1;
     } else {
-      this.listaCustosFiltrados = this.listaCustos.filter(custos =>
-        custos.id.toString().includes(termo) ||
-        custos.descricao.toLowerCase().includes(termo) ||
-        custos.valorGasto.toString().includes(termo) ||
-        custos.qtdParcelas.toString().includes(termo) ||
-        custos.data.includes(termo)
+      this.listaCustosFiltrados = this.listaCustos.filter(custo =>
+        custo.descricao?.toLowerCase().includes(termo) ||
+        custo.valorGasto?.toString().includes(termo) ||
+        custo.qtdParcelas?.toString().includes(termo) ||
+        custo.data?.toLowerCase().includes(termo) ||
+        custo._id?.toString().includes(termo)
       );
     }
+  }
+
+  resetarValores() {
+    this.descricao = '';
+    this.valorGasto = 0;
+    this.qtdParcelas = 0;
+    this.data = '';
   }
 }

@@ -33,20 +33,20 @@
 
   <section class="tabela-container">
     @if (this.listaCustos.length == 0) {
-      <p class="empty">Não há clientes cadastrados</p>
+      <p class="empty">Não há custos cadastrados</p>
     } @else {
       <table>
         <tbody>
           @for (custos of this.custosPaginados; track custos.id) {
             <tr>
-              <td class="td_id">{{ custos.id }}</td>
+              <td class="td_id">{{ custos._id }}</td>
               <td class="td_descricao">{{ custos.descricao }}</td>
               <td class="td_valorGasto">{{ custos.valorGasto }}</td>
               <td class="td_qtdParcelas">{{ custos.qtdParcelas }}</td>
               <td class="td_data">{{custos.data}}</td>
               <td class="acoes">
-                <button class="editar" title="Editar" (click)="abrirModalEditar(custos.id)">✏️</button>
-                <button class="deletar" title="Excluir" (click)="excluirCliente(custos.id)">🗑️</button>
+                <button class="editar" title="Editar" (click)="abrirModalEditar(custos._id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(custos._id)">🗑️</button>
               </td>
             </tr>
           }

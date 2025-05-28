@@ -1,23 +1,42 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { ViagemService } from './clientes-viagem.service';
 
 @Component({
   selector: 'app-clientes-viagem',
+  standalone: true,
   imports: [
     RouterLink,
     FormsModule,
-    NgIf
+    NgIf,
   ],
   templateUrl: './clientes-viagem.component.html',
-  styleUrl: './clientes-viagem.component.css'
+  styleUrls: ['./clientes-viagem.component.css']
 })
-export class ClientesViagemComponent {
+export class ClientesViagemComponent implements OnInit {
+
   listaViagem: any[] = [];
+  listaViagemFiltrados: any[] = [];
 
   paginaAtual = 1;
   itensPorPagina = 8;
+  filtro = '';
+
+  id_cliente = '';
+  date = '';
+  time = '';
+
+  clienteEditando: any = null;
+  classeAdicionar = 'modal-fechado';
+  classeEditar = 'modal-fechado';
+
+  constructor(private viagemService: ViagemService) {}
+
+  ngOnInit() {
+    this.carregarViagens();
+  }
 
   get custosPaginados() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
@@ -35,91 +54,65 @@ export class ClientesViagemComponent {
     }
   }
 
-  listaViagemFiltrados: any[] = [];
-  
-  filtro: string = "";
-
-  incrementarId = 0;
-
-  id = 0;
-  id_cliente = 0;
-  date = "";
-  time = "";
-
-
-  clienteEditando: any = null;
-
-  classeAdicionar = "modal-fechado";
-  classeEditar = "modal-fechado";
-
-  constructor() {
-    this.listaViagemFiltrados = this.listaViagem
-  }
-
-
-  resetarValores(){
-    this.id = 0;
-    this.id_cliente = 0;
-    this.date = "";
-    this.time = "";
-  }
-
-  adicionar(){
-    if(this.id !== null && this.date !== "" && this.time !== "") {
-      const newCliente = {
-        id: this.incrementarId,
-        id_cliente: this.id_cliente,
-        date: this.date,
-        time: this.time,
-      }
-
-      this.listaViagem.push(newCliente);
+  carregarViagens() {
+    this.viagemService.getViagens().subscribe(data => {
+      this.listaViagem = data;
       this.aplicarFiltro();
-
-      this.resetarValores();
-      this.classeAdicionar = "modal-fechado";
-      this.incrementarId++;
-    }else{
-      this.classeAdicionar = "modal-fechado";
-    }
+    });
   }
 
-  abrirModalEditar(id: number) {
-    const cliente = this.listaViagem.find(c => c.id === id);
-    if (cliente) {
-      this.clienteEditando = { ...cliente };
-      this.classeEditar = "modal";
-    }
+  adicionar() {
+    const novaViagem = {
+      id_cliente: this.id_cliente,
+      date: this.date,
+      time: this.time,
+    };
+
+    this.viagemService.adicionar(novaViagem).subscribe(() => {
+      this.carregarViagens();
+      this.resetarValores();
+      this.classeAdicionar = 'modal-fechado';
+    });
+  }
+
+  abrirModalEditar(id: string) {
+    const viagem = this.listaViagem.find(v => v._id === id);
+    this.clienteEditando = { ...viagem };
+    this.classeEditar = 'modal';
   }
 
   salvarEdicao() {
-    const index = this.listaViagem.findIndex(c => c.id === this.clienteEditando.id);
-    if (index !== -1) {
-      this.listaViagem[index] = { ...this.clienteEditando };
-      this.aplicarFiltro();
-    }
-    this.classeEditar = "modal-fechado";
-    this.clienteEditando = null;
+    this.viagemService.atualizar(this.clienteEditando._id, this.clienteEditando).subscribe(() => {
+      this.carregarViagens();
+      this.classeEditar = 'modal-fechado';
+      this.clienteEditando = null;
+    });
   }
 
-  excluirCliente(id: number) {
-    this.listaViagem = this.listaViagem.filter((item) => item.id !== id);
-    this.aplicarFiltro();
+  excluirCliente(id: string) {
+    this.viagemService.deletar(id).subscribe(() => {
+      this.carregarViagens();
+    });
   }
 
   aplicarFiltro() {
     const termo = this.filtro.trim().toLowerCase();
-    
     if (termo === '') {
       this.listaViagemFiltrados = [...this.listaViagem];
       this.paginaAtual = 1;
     } else {
       this.listaViagemFiltrados = this.listaViagem.filter(viagem =>
-        viagem.id_cliente.toString().includes(termo) ||
-        viagem.date.includes(termo) ||
-        viagem.time.includes(termo) ||
-        viagem.id.toString().includes(termo)
+        viagem.id_cliente?.toString().includes(termo) ||
+        viagem.date?.toLowerCase().includes(termo) ||
+        viagem.time?.toLowerCase().includes(termo) ||
+        viagem._id?.toString().includes(termo)
       );
     }
+  }
+
+  resetarValores() {
+    this.id_cliente = '';
+    this.date = '';
+    this.time = '';
   }
 }

@@ -43,21 +43,21 @@
 
   <section class="tabela-container">
     @if (this.listaEndereco.length == 0) {
-      <p class="empty">Não há clientes cadastrados</p>
+      <p class="empty">Não há endereços cadastrados</p>
     } @else {
       <table>
         <tbody>
           @for (endereco of this.custosPaginados; track endereco.id) {
             <tr>
-              <td class="td_id">{{ endereco.id }}</td>
+              <td class="td_id">{{ endereco._id }}</td>
               <td class="td_rua">{{ endereco.rua }}</td>
               <td class="td_bairro">{{ endereco.bairro }}</td>
               <td class="td_numero">{{ endereco.numero }}</td>
               <td class="td_cidade">{{ endereco.cidade }}</td>
               <td class="td_estado">{{ endereco.estado }}</td>
               <td class="acoes">
-                <button class="editar" title="Editar" (click)="abrirModalEditar(endereco.id)">✏️</button>
-                <button class="deletar" title="Excluir" (click)="excluirCliente(endereco.id)">🗑️</button>
+                <button class="editar" title="Editar" (click)="abrirModalEditar(endereco._id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(endereco._id)">🗑️</button>
               </td>
             </tr>
           }
@@ -141,7 +141,7 @@
         <input [(ngModel)]="clienteEditando.cidade" name="cidade" type="text">
         <label class="form-label" for="estados">Escolha o Estado</label>
 
-        <select [(ngModel)]="estado" name="estado" id="estados">
+        <select [(ngModel)]="clienteEditando.estado" name="estado" id="estados">
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -173,7 +173,7 @@
         </select>
         <div class="botoes-form">
           <button class="confirmar" type="submit">Atualizar</button>
-          <button class="cancelar" (click)="classeAdicionar = 'modal-fechado'">Cancelar</button>
+          <button class="cancelar" (click)="classeEditar = 'modal-fechado'">Cancelar</button>
         </div>
       </form>
     </div>

@@ -50,15 +50,15 @@
         <tbody>
           @for (cliente of this.custosPaginados; track cliente.id) {
             <tr>
-              <td class="td_id">{{ cliente.id }}</td>
+              <td class="td_id">{{ cliente._id }}</td>
               <td class="td_nome">{{ cliente.nome }}</td>
               <td class="td_sobrenome">{{ cliente.sobrenome }}</td>
               <td class="td_id_endereco">{{ cliente.id_endereco }}</td>
               <td class="td_telefone">{{ cliente.telefone }}</td>
               <td class="td_telefone2">{{ cliente.telefone2 }}</td>
               <td class="acoes">
-                <button class="editar" title="Editar" (click)="abrirModalEditar(cliente.id)">✏️</button>
-                <button class="deletar" title="Excluir" (click)="excluirCliente(cliente.id)">🗑️</button>
+                <button class="editar" title="Editar" (click)="abrirModalEditar(cliente._id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(cliente._id)">🗑️</button>
               </td>
             </tr>
           }

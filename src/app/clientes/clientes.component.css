@@ -156,27 +156,27 @@
 }
 
 .tabela-title-text2{
-  margin-left: 4.8vw;
-}
-
-.tabela-title-text3{
-  margin-left: 16vw;
-}
-
-.tabela-title-text4{
   margin-left: 13vw;
 }
 
+.tabela-title-text3{
+  margin-left: 13vw;
+}
+
+.tabela-title-text4{
+  margin-left: 10vw;
+}
+
 .tabela-title-text5{
-  margin-left: 3vw;
+  margin-left: 2vw;
 }
 
 .tabela-title-text6{
-  margin-left: 8vw;
+  margin-left: 7vw;
 }
 
 .tabela-title-text7{
-  margin-left: 9vw;
+  margin-left: 8vw;
 }
 
 .tabela-container {
@@ -207,7 +207,7 @@ td {
 }
 
 .td_id{
-  width: 6.115vw;
+  width: 11.617vw;
 }
 
 .td_nome{

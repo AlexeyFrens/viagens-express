@@ -41,19 +41,19 @@
 
   <section class="tabela-container">
     @if (this.listaViagem.length == 0) {
-      <p class="empty">Não há clientes cadastrados</p>
+      <p class="empty">Não há viagens cadastrados</p>
     } @else {
       <table>
         <tbody>
           @for (viagem of this.custosPaginados; track viagem.id) {
             <tr>
-              <td class="td_id">{{ viagem.id }}</td>
+              <td class="td_id">{{ viagem._id }}</td>
               <td class="td_id_cliente">{{ viagem.id_cliente }}</td>
               <td class="td_date">{{ viagem.date }}</td>
               <td class="td_time">{{ viagem.time }}</td>
               <td class="acoes">
-                <button class="editar" title="Editar" (click)="abrirModalEditar(viagem.id)">✏️</button>
-                <button class="deletar" title="Excluir" (click)="excluirCliente(viagem.id)">🗑️</button>
+                <button class="editar" title="Editar" (click)="abrirModalEditar(viagem._id)">✏️</button>
+                <button class="deletar" title="Excluir" (click)="excluirCliente(viagem._id)">🗑️</button>
               </td>
             </tr>
           }

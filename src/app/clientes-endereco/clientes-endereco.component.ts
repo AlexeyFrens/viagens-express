@@ -1,23 +1,44 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { EnderecoService } from './clientes-endereco.service';
 
 @Component({
   selector: 'app-clientes-endereco',
+  standalone: true,
   imports: [
     RouterLink,
     FormsModule,
-    NgIf
+    NgIf,
   ],
   templateUrl: './clientes-endereco.component.html',
-  styleUrl: './clientes-endereco.component.css'
+  styleUrls: ['./clientes-endereco.component.css']
 })
-export class ClientesEnderecoComponent {
+export class ClientesEnderecoComponent implements OnInit {
+
   listaEndereco: any[] = [];
+  listaEnderecoFiltrados: any[] = [];
 
   paginaAtual = 1;
   itensPorPagina = 8;
+  filtro = '';
+
+  rua = '';
+  bairro = '';
+  numero = '';
+  cidade = '';
+  estado = '';
+
+  clienteEditando: any = null;
+  classeAdicionar = 'modal-fechado';
+  classeEditar = 'modal-fechado';
+
+  constructor(private enderecoService: EnderecoService) {}
+
+  ngOnInit() {
+    this.carregarEnderecos();
+  }
 
   get custosPaginados() {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
@@ -35,81 +56,47 @@ export class ClientesEnderecoComponent {
     }
   }
 
-  listaEnderecoFiltrados: any[] = [];
-  
-  filtro: string = "";
-
-  incrementarId = 0;
-
-  id = 0;
-  rua = "";
-  bairro = "";
-  numero = 0;
-  cidade = "";
-  estado = "";
-
-  clienteEditando: any = null;
-
-  classeAdicionar = "modal-fechado";
-  classeEditar = "modal-fechado";
-
-  constructor() {
-    this.listaEnderecoFiltrados = this.listaEndereco
-  }
-
-
-  resetarValores(){
-    this.id = 0;
-    this.rua = "";
-    this.bairro = "";
-    this.numero = 0;
-    this.cidade = "";
-    this.estado = "";
-  }
-
-  adicionar(){
-    if(this.id !== null && this.rua !== "" && this.bairro !== "" && this.numero !== null && this.cidade !== "" && this.estado !== "") {
-      const newCliente = {
-        id: this.incrementarId,
-        rua: this.rua,
-        bairro: this.bairro,
-        numero: this.numero,
-        cidade: this.cidade,
-        estado: this.estado
-      }
-
-      this.listaEndereco.push(newCliente);
+  carregarEnderecos() {
+    this.enderecoService.getEnderecos().subscribe(data => {
+      this.listaEndereco = data;
       this.aplicarFiltro();
-
-      this.resetarValores();
-      this.classeAdicionar = "modal-fechado";
-      this.incrementarId++;
-    }else{
-      this.classeAdicionar = "modal-fechado";
-    }
+    });
   }
 
-  abrirModalEditar(id: number) {
-    const cliente = this.listaEndereco.find(c => c.id === id);
-    if (cliente) {
-      this.clienteEditando = { ...cliente };
-      this.classeEditar = "modal";
-    }
+  adicionar() {
+    const novoEndereco = {
+      rua: this.rua,
+      bairro: this.bairro,
+      numero: this.numero,
+      cidade: this.cidade,
+      estado: this.estado
+    };
+
+    this.enderecoService.adicionar(novoEndereco).subscribe(() => {
+      this.carregarEnderecos();
+      this.resetarValores();
+      this.classeAdicionar = 'modal-fechado';
+    });
+  }
+
+  abrirModalEditar(id: string) {
+    const endereco = this.listaEndereco.find(e => e._id === id);
+    this.clienteEditando = { ...endereco };
+    this.classeEditar = 'modal';
   }
 
   salvarEdicao() {
-    const index = this.listaEndereco.findIndex(c => c.id === this.clienteEditando.id);
-    if (index !== -1) {
-      this.listaEndereco[index] = { ...this.clienteEditando };
-      this.aplicarFiltro();
-    }
-    this.classeEditar = "modal-fechado";
-    this.clienteEditando = null;
+    this.enderecoService.atualizar(this.clienteEditando._id, this.clienteEditando).subscribe(() => {
+      this.carregarEnderecos();
+      this.classeEditar = 'modal-fechado';
+      this.clienteEditando = null;
+    });
   }
 
-  excluirCliente(id: number) {
-    this.listaEndereco = this.listaEndereco.filter((item) => item.id !== id);
-    this.aplicarFiltro();
+  excluirCliente(id: string) {
+    this.enderecoService.deletar(id).subscribe(() => {
+      this.carregarEnderecos();
+    });
   }
 
   aplicarFiltro() {
@@ -119,13 +106,21 @@ export class ClientesEnderecoComponent {
       this.paginaAtual = 1;
     } else {
       this.listaEnderecoFiltrados = this.listaEndereco.filter(endereco =>
-        endereco.rua.toLowerCase().includes(termo) ||
-        endereco.bairro.toLowerCase().includes(termo) ||
-        endereco.numero.toString().includes(termo) ||
-        endereco.cidade.toLowerCase().includes(termo) ||
-        endereco.estado.toLowerCase().includes(termo) ||
-        endereco.id.toString().includes(termo)
+        endereco.rua?.toLowerCase().includes(termo) ||
+        endereco.bairro?.toLowerCase().includes(termo) ||
+        endereco.numero?.toString().includes(termo) ||
+        endereco.cidade?.toLowerCase().includes(termo) ||
+        endereco.estado?.toLowerCase().includes(termo) ||
+        endereco._id?.toString().includes(termo)
       );
     }
+  }
+
+  resetarValores() {
+    this.rua = '';
+    this.bairro = '';
+    this.numero = '';
+    this.cidade = '';
+    this.estado = '';
   }
 }

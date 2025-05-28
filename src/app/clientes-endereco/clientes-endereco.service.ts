@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EnderecoService {
-  private apiUrl = 'http://gueto.nodes.hyperpowered.net:64566/enderecos';
+  private apiUrl = 'https://viagens-express-backend.onrender.com/enderecos';
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientesService {
-  private apiUrl = 'http://gueto.nodes.hyperpowered.net:64566/clientes';
+  private apiUrl = 'https://viagens-express-backend.onrender.com/clientes';
 
   constructor(private http: HttpClient) {}
 

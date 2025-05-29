@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ViagemService } from './clientes-viagem.service';
+import {AuthService} from '../login-admin/login-admin.service';
 
 @Component({
   selector: 'app-clientes-viagem',
@@ -32,7 +33,7 @@ export class ClientesViagemComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private viagemService: ViagemService) {}
+  constructor(private viagemService: ViagemService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.carregarViagens();
@@ -114,5 +115,9 @@ export class ClientesViagemComponent implements OnInit {
     this.id_cliente = '';
     this.date = '';
     this.time = '';
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

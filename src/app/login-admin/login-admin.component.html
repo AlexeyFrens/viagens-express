@@ -10,10 +10,12 @@
     <p class="login-text">Você precisa estar logado para acessar as funcionalidades do administrador</p>
   </div>
 
-  <input type="email" name="email-input" id="email-input" placeholder="Login">
-  <input type="password" name="pass-input" id="pass-input" placeholder="Senha">
+  <input [(ngModel)]="email" type="email" name="email-input" id="email-input" placeholder="Login">
+  <input [(ngModel)]="senha" type="password" name="pass-input" id="pass-input" placeholder="Senha">
 
-  <a class="login-button" routerLink="/clientes">Entrar</a>
+  <p *ngIf="erro" style="color: red;">{{ erro }}</p>
+
+  <button class="login-button" (click)="login()">Entrar</button>
 </section>
 
 <router-outlet></router-outlet>

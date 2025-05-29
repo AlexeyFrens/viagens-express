@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { EnderecoService } from './clientes-endereco.service';
+import {AuthService} from '../login-admin/login-admin.service';
 
 @Component({
   selector: 'app-clientes-endereco',
@@ -34,7 +35,7 @@ export class ClientesEnderecoComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private enderecoService: EnderecoService) {}
+  constructor(private enderecoService: EnderecoService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.carregarEnderecos();
@@ -122,5 +123,9 @@ export class ClientesEnderecoComponent implements OnInit {
     this.numero = '';
     this.cidade = '';
     this.estado = '';
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

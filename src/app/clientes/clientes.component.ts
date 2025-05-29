@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ClientesService } from './clientes.service';
+import {AuthService} from '../login-admin/login-admin.service';
 
 @Component({
   selector: 'app-clientes',
@@ -34,7 +35,7 @@ export class ClientesComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private clienteService: ClientesService) {}
+  constructor(private clienteService: ClientesService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.carregarClientes();
@@ -122,5 +123,9 @@ export class ClientesComponent implements OnInit {
     this.id_endereco = '';
     this.telefone = '';
     this.telefone2 = '';
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

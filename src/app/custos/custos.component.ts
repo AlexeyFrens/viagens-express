@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CustosService } from './custos.service';
+import {AuthService} from '../login-admin/login-admin.service';
 
 @Component({
   selector: 'app-custos',
@@ -33,7 +34,7 @@ export class CustosComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private custosService: CustosService) {}
+  constructor(private custosService: CustosService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.carregarCustos();
@@ -118,5 +119,9 @@ export class CustosComponent implements OnInit {
     this.valorGasto = 0;
     this.qtdParcelas = 0;
     this.data = '';
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

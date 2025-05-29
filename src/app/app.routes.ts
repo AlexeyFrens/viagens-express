@@ -5,6 +5,7 @@ import {ClientesComponent} from './clientes/clientes.component';
 import {ClientesEnderecoComponent} from './clientes-endereco/clientes-endereco.component';
 import {ClientesViagemComponent} from './clientes-viagem/clientes-viagem.component';
 import {CustosComponent} from './custos/custos.component';
+import {authGuard} from './login-admin/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,19 +18,23 @@ export const routes: Routes = [
   },
   {
     path: 'clientes',
-    component: ClientesComponent
+    component: ClientesComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'enderecos',
-    component: ClientesEnderecoComponent
+    component: ClientesEnderecoComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'viagens',
-    component: ClientesViagemComponent
+    component: ClientesViagemComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'custos',
-    component: CustosComponent
+    component: CustosComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',

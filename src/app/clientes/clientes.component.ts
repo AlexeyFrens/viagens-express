@@ -35,7 +35,7 @@ export class ClientesComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private clienteService: ClientesService, private authService: AuthService, private router: Router) { }
+  constructor(private clienteService: ClientesService, private authService: AuthService) { }
 
   ngOnInit() {
     this.carregarClientes();
@@ -104,7 +104,6 @@ export class ClientesComponent implements OnInit {
     const termo = this.filtro.trim().toLowerCase();
     if (termo === '') {
       this.listaClientesFiltrados = [...this.listaClientes];
-      this.paginaAtual = 1;
     } else {
       this.listaClientesFiltrados = this.listaClientes.filter(cliente =>
         cliente.nome?.toLowerCase().includes(termo) ||

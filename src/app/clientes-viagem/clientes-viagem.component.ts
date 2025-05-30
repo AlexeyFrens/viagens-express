@@ -33,7 +33,7 @@ export class ClientesViagemComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private viagemService: ViagemService, private authService: AuthService, private router: Router) { }
+  constructor(private viagemService: ViagemService, private authService: AuthService) { }
 
   ngOnInit() {
     this.carregarViagens();
@@ -100,7 +100,6 @@ export class ClientesViagemComponent implements OnInit {
     const termo = this.filtro.trim().toLowerCase();
     if (termo === '') {
       this.listaViagemFiltrados = [...this.listaViagem];
-      this.paginaAtual = 1;
     } else {
       this.listaViagemFiltrados = this.listaViagem.filter(viagem =>
         viagem.id_cliente?.toString().includes(termo) ||

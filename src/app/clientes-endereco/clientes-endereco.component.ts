@@ -35,7 +35,7 @@ export class ClientesEnderecoComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private enderecoService: EnderecoService, private authService: AuthService, private router: Router) { }
+  constructor(private enderecoService: EnderecoService, private authService: AuthService) { }
 
   ngOnInit() {
     this.carregarEnderecos();
@@ -104,7 +104,6 @@ export class ClientesEnderecoComponent implements OnInit {
     const termo = this.filtro.trim().toLowerCase();
     if (termo === '') {
       this.listaEnderecoFiltrados = [...this.listaEndereco];
-      this.paginaAtual = 1;
     } else {
       this.listaEnderecoFiltrados = this.listaEndereco.filter(endereco =>
         endereco.rua?.toLowerCase().includes(termo) ||

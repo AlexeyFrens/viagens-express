@@ -34,7 +34,7 @@ export class CustosComponent implements OnInit {
   classeAdicionar = 'modal-fechado';
   classeEditar = 'modal-fechado';
 
-  constructor(private custosService: CustosService, private authService: AuthService, private router: Router) { }
+  constructor(private custosService: CustosService, private authService: AuthService) { }
 
   ngOnInit() {
     this.carregarCustos();
@@ -102,7 +102,6 @@ export class CustosComponent implements OnInit {
     const termo = this.filtro.trim().toLowerCase();
     if (termo === '') {
       this.listaCustosFiltrados = [...this.listaCustos];
-      this.paginaAtual = 1;
     } else {
       this.listaCustosFiltrados = this.listaCustos.filter(custo =>
         custo.descricao?.toLowerCase().includes(termo) ||
